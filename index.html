@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jasa Teknik Elektro Profesional</title>
+    <title>Al Muis Solution</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,16 +11,16 @@
             padding: 0;
             color: #333;
             background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
-
         header {
             background-color: #4CAF50;
             color: white;
             text-align: center;
             padding: 1.5em 0;
-            margin-bottom: 1em;
         }
-
         nav ul {
             list-style-type: none;
             padding: 0;
@@ -28,31 +28,26 @@
             background-color: #333;
             margin: 0;
         }
-
         nav ul li {
             display: inline;
             margin-right: 1em;
         }
-
         nav ul li a {
             color: white;
             text-decoration: none;
             padding: 0.5em 1em;
             display: inline-block;
         }
-
         nav ul li a:hover {
             background-color: #ddd;
             color: black;
             transition: background-color 0.3s;
         }
-
         .container {
             width: 80%;
             margin: auto;
-            overflow: hidden;
+            flex: 1;
         }
-
         section {
             padding: 2em;
             background-color: white;
@@ -60,22 +55,26 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
         section h2 {
             border-bottom: 2px solid #4CAF50;
             padding-bottom: 0.5em;
             margin-bottom: 1em;
             color: #4CAF50;
         }
-
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 1em 0;
-            margin-top: 1em;
+        .home-grid, .service-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 20px;
         }
-
+        .home-item, .service-item {
+            background-color: #e0f7fa;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .home-item:hover, .service-item:hover {
+            background-color: #b2ebf2;
+        }
         .btn {
             display: inline-block;
             padding: 0.5em 1em;
@@ -88,80 +87,251 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
-
         .btn:hover {
             background-color: #45a049;
         }
-
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        form label {
+            margin-bottom: 0.5em;
+            font-weight: bold;
+        }
+        form input, form textarea {
+            padding: 0.5em;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            margin-bottom: 1em;
+        }
+        form button {
+            padding: 0.7em;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        form button:hover {
+            background-color: #45a049;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            z-index: 1000;
+        }
         @media (max-width: 768px) {
             .container {
                 width: 100%;
                 padding: 0 1em;
             }
-
-            nav ul li {
-                display: block;
-                margin: 0;
+            .home-grid, .service-grid {
+                grid-template-columns: 1fr;
             }
-
-            nav ul li a {
-                display: block;
-                margin-bottom: 0.5em;
-            }
+        }
+        .section-content {
+            display: none;
+        }
+        .section-content.active {
+            display: block;
+        }
+        .contact-icon {
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 50%;
+            padding: 15px;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            font-size: 20px;
+            z-index: 1001;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Jasa Teknik Elektro Profesional</h1>
+        <h1>Al Muis Solution</h1>
     </header>
     <nav>
         <ul>
-            <li><a href="#mentoring">Mentoring</a></li>
-            <li><a href="#konsultasi">Konsultasi Elektro</a></li>
-            <li><a href="#gambar">Gambar Teknik</a></li>
-            <li><a href="#simulasi">Simulasi</a></li>
-            <li><a href="#kontak">Kontak</a></li>
+            <li><a href="#home" onclick="showSection('home')">Home</a></li>
+            <li><a href="#about" onclick="showSection('about')">About</a></li>
+            <li><a href="#mentoring" onclick="showSection('mentoring')">Program Mentoring</a></li>
+            <li><a href="#konsultasi" onclick="showSection('konsultasi')">Konsultasi Elektro</a></li>
+            <li><a href="#gambar" onclick="showSection('gambar')">Gambar Teknik</a></li>
+            <li><a href="#simulasi" onclick="showSection('simulasi')">Simulasi</a></li>
+            <li><a href="#kontak" onclick="showSection('kontak')">Kontak</a></li>
         </ul>
     </nav>
     <div class="container">
-        <section id="mentoring">
-            <h2>Mentoring</h2>
-            <p>Program mentoring kami dirancang untuk membantu mahasiswa memahami dan menguasai teknik elektro dengan lebih baik. Tersedia paket bulanan, mingguan, dan semesteran.</p>
-            <a href="#kontak" class="btn">Daftar Sekarang</a>
-        </section>
-        <section id="konsultasi">
-            <h2>Konsultasi Elektro</h2>
-            <p>Kami menawarkan layanan konsultasi profesional untuk membantu Anda menyelesaikan masalah teknik elektro yang kompleks. Kami siap membantu per proyek sesuai kebutuhan Anda.</p>
-            <a href="#kontak" class="btn">Hubungi Kami</a>
-        </section>
-        <section id="gambar">
-            <h2>Gambar Teknik</h2>
-            <p>Layanan gambar teknik kami mencakup pembuatan dan revisi gambar teknik untuk berbagai keperluan. Mulai dari Rp 300.000 per proyek.</p>
-            <a href="#kontak" class="btn">Pesan Sekarang</a>
-        </section>
-        <section id="simulasi">
-            <h2>Simulasi</h2>
-            <p>Kami menyediakan layanan simulasi untuk berbagai kebutuhan teknik elektro. Mulai dari Rp 300.000 per proyek.</p>
-            <a href="#kontak" class="btn">Pesan Sekarang</a>
-        </section>
-        <section id="kontak">
-            <h2>Kontak Kami</h2>
-            <p>Untuk informasi lebih lanjut atau memesan layanan, silakan hubungi kami:</p>
-            <ul>
-                <li>Email: info@jasaelektro.com</li>
-                <li>Telepon: 0812-3456-7890</li>
-                <li>Alamat: Jl. Teknik Elektro No. 1, Magelang</li>
-            </ul>
-        </section>
+        <div id="home" class="section-content active">
+            <section>
+                <h2>Home</h2>
+                <div class="home-grid">
+                    <div class="home-item">
+                        <h3>Program Mentoring</h3>
+                        <p>Pengembangan keterampilan teknis dan profesional dalam bidang elektro.</p>
+                    </div>
+                    <div class="home-item">
+                        <h3>Konsultasi Elektro</h3>
+                        <p>Pemecahan masalah teknis dan merancang solusi yang efektif.</p>
+                    </div>
+                    <div class="home-item">
+                        <h3>Gambar Teknik</h3>
+                        <p>Layanan pembuatan gambar teknik yang akurat dan profesional.</p>
+                    </div>
+                    <div class="home-item">
+                        <h3>Simulasi</h3>
+                        <p>Menganalisis dan merancang sistem elektro secara efektif.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div id="about" class="section-content">
+            <section>
+                <h2>Tentang Kami</h2>
+                <p>Al Muis Solution adalah penyedia layanan konsultasi teknik elektro, gambar teknik, dan simulasi. Kami berkomitmen untuk memberikan solusi teknis terbaik untuk membantu proyek Anda.</p>
+                <p>Dengan pengalaman bertahun-tahun dan tim profesional yang berdedikasi, kami siap menghadapi tantangan teknis yang Anda hadapi dan memberikan hasil yang memuaskan.</p>
+                <p><strong>Visi:</strong> Menjadi penyedia solusi teknik elektro terkemuka di Indonesia.</p>
+                <p><strong>Misi:</strong> 
+                    <ul>
+                        <li>Menyediakan layanan berkualitas tinggi dengan pendekatan yang inovatif.</li>
+                        <li>Menjaga kepuasan pelanggan melalui solusi yang efektif dan efisien.</li>
+                        <li>Mengembangkan keterampilan tim melalui pelatihan berkelanjutan.</li>
+                    </ul>
+                </p>
+            </section>
+        </div>
+        <div id="mentoring" class="section-content">
+            <section>
+                <h2>Program Mentoring</h2>
+                <div class="service-grid">
+                    <div class="service-item">
+                        <h3>Mentoring Individual</h3>
+                        <p>Program mentoring individual yang disesuaikan dengan kebutuhan dan tujuan Anda.</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>Mentoring Kelompok</h3>
+                        <p>Program mentoring dalam kelompok untuk kolaborasi dan belajar bersama.</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>Pengembangan Keterampilan</h3>
+                        <p>Meningkatkan keterampilan teknis dan profesional di bidang elektro.</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>Solusi Masalah</h3>
+                        <p>Membantu menyelesaikan masalah teknis yang Anda hadapi dalam studi atau pekerjaan.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div id="konsultasi" class="section-content">
+            <section>
+                <h2>Konsultasi Elektro</h2>
+                <div class="service-grid">
+                    <div class="service-item">
+                        <h3>Analisis Masalah Teknis</h3>
+                        <p>Kami membantu Anda menganalisis masalah teknis yang kompleks dalam bidang elektro.</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>Solusi Efektif</h3>
+                        <p>Kami menawarkan solusi yang tepat guna untuk permasalahan teknis Anda.</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>Peningkatan Efisiensi</h3>
+                        <p>Konsultasi untuk meningkatkan efisiensi sistem elektro yang ada.</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>Pemilihan Teknologi</h3>
+                        <p>Kami membantu Anda memilih teknologi yang tepat untuk kebutuhan proyek Anda.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div id="gambar" class="section-content">
+            <section>
+                <h2>Gambar Teknik</h2>
+                <div class="service-grid">
+                    <div class="service-item">
+                        <h3>Pembuatan Gambar Teknik</h3>
+                        <p>Kami menyediakan layanan pembuatan gambar teknik yang presisi dan detail.</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>Revisi Gambar</h3>
+                        <p>Kami melakukan revisi gambar teknik sesuai dengan kebutuhan proyek Anda.</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>Gambar Desain Awal</h3>
+                        <p>Pembuatan gambar desain awal untuk mendukung proses perancangan.</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>Dokumentasi Proyek</h3>
+                        <p>Dokumentasi gambar teknik untuk keperluan proyek dan arsip.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div id="simulasi" class="section-content">
+            <section>
+                <h2>Simulasi</h2>
+                <div class="service-grid">
+                    <div class="service-item">
+                        <h3>Simulasi Sistem Elektro</h3>
+                        <p>Menyediakan simulasi sistem elektro untuk analisis dan perancangan.</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>Validasi Desain</h3>
+                        <p>Simulasi untuk memvalidasi desain sebelum implementasi.</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>Optimasi Kinerja</h3>
+                        <p>Simulasi untuk mengoptimalkan kinerja sistem elektro Anda.</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>Pelatihan Simulasi</h3>
+                        <p>Kami juga menawarkan pelatihan simulasi untuk pengembangan keterampilan teknis Anda.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div id="kontak" class="section-content">
+            <section>
+                <h2>Kontak Kami</h2>
+                <form>
+                    <label for="name">Nama:</label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    <label for="message">Pesan:</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+                    <button type="submit">Kirim</button>
+                </form>
+            </section>
+        </div>
     </div>
     <footer>
-        <p>&copy; 2024 Jasa Teknik Elektro. All rights reserved.</p>
+        <p>&copy; 2024 Al Muis Solution. All rights reserved.</p>
     </footer>
+    <div class="contact-icon">
+        📞
+    </div>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('Website ready');
-        });
+        function showSection(sectionId) {
+            var sections = document.getElementsByClassName('section-content');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            document.getElementById(sectionId).classList.add('active');
+        }
     </script>
 </body>
 </html>
