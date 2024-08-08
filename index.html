@@ -159,7 +159,7 @@
 </head>
 <body>
     <header>
-        <h1> Al Muis Solution</h1>
+        <h1>Al Muis Solution</h1>
     </header>
     <nav>
         <ul>
@@ -179,7 +179,7 @@
                 <div class="home-grid">
                     <div class="home-item">
                         <h3>Program Mentoring</h3>
-                        <p>Program mentoring untuk mahasiswa  elektro (perkuliahan dan skripsi) dan siswa SMA</p>
+                        <p>Program mentoring untuk mahasiswa elektro (perkuliahan dan skripsi) dan siswa SMA</p>
                     </div>
                     <div class="home-item">
                         <h3>Konsultasi Elektro</h3>
@@ -202,7 +202,7 @@
                 <p>Al Muis Solution adalah penyedia layanan konsultasi teknik elektro, gambar teknik, dan simulasi. Kami berkomitmen untuk memberikan solusi teknis terbaik untuk membantu proyek Anda.</p>
                 <p>Dengan pengalaman bertahun-tahun dan tim profesional yang berdedikasi, kami siap menghadapi tantangan teknis yang Anda hadapi dan memberikan hasil yang memuaskan.</p>
                 <p><strong>Visi:</strong> Menjadi penyedia solusi teknik elektro terkemuka di Indonesia.</p>
-                <p><strong>Misi:</strong> 
+                <p><strong>Misi:</strong>
                     <ul>
                         <li>Menyediakan layanan berkualitas tinggi dengan pendekatan yang inovatif.</li>
                         <li>Menjaga kepuasan pelanggan melalui solusi yang efektif dan efisien.</li>
@@ -306,7 +306,7 @@
         <div id="kontak" class="section-content">
             <section>
                 <h2>Kontak Kami</h2>
-                <form>
+                <form id="contactForm">
                     <label for="name">Nama:</label>
                     <input type="text" id="name" name="name" required>
                     <label for="email">Email:</label>
@@ -332,6 +332,25 @@
             }
             document.getElementById(sectionId).classList.add('active');
         }
+
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var formData = new FormData(event.target);
+
+            fetch('https://script.google.com/macros/s/AKfycbwIUh-Y5P7hyOAYpbINZSK_gYiofvkd3x86093e7oipyzO-dqY7MU7bVSJ-32iz7olX/exec', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(result => {
+                alert('Pesan Anda telah dikirim!');
+                event.target.reset();
+            })
+            .catch(error => {
+                alert('Terjadi kesalahan. Silakan coba lagi.');
+                console.error('Error:', error);
+            });
+        });
     </script>
 </body>
 </html>
